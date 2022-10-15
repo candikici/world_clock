@@ -1,4 +1,5 @@
 import 'package:dop_case/services/http/http_service.dart';
+import 'package:dop_case/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,19 +29,5 @@ class WorldClock extends StatelessWidget {
         home: const HomePage(),
       ),
     );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
   }
 }
