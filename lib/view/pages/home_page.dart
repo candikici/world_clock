@@ -1,7 +1,6 @@
 import 'package:dop_case/provider/app_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       return SafeArea(
         child: Scaffold(
           body: isLoading
-              ? Center(
+              ? const Center(
                   child: CircularProgressIndicator(),
                 )
               : Column(

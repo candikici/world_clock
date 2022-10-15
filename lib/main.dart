@@ -1,4 +1,5 @@
 import 'package:dop_case/services/http/http_service.dart';
+import 'package:dop_case/utilities/router.dart';
 import 'package:dop_case/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,11 +7,16 @@ import 'package:provider/provider.dart';
 import 'provider/app_state.dart';
 
 void main() {
-  runApp(const WorldClock());
+  runApp(WorldClock(appRouter: AppRouter()));
 }
 
 class WorldClock extends StatelessWidget {
-  const WorldClock({super.key});
+  const WorldClock({
+    super.key,
+    required this.appRouter,
+  });
+
+  final AppRouter appRouter;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +28,7 @@ class WorldClock extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        onGenerateRoute: (settings) => appRouter.onGenerateRoute(settings),
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
