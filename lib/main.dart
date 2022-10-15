@@ -1,3 +1,4 @@
+import 'package:dop_case/constants/colors.dart';
 import 'package:dop_case/services/http/http_service.dart';
 import 'package:dop_case/utilities/router.dart';
 import 'package:dop_case/view/pages/home_page.dart';
@@ -31,6 +32,7 @@ class WorldClock extends StatelessWidget {
         onGenerateRoute: (settings) => appRouter.onGenerateRoute(settings),
         title: 'Flutter Demo',
         theme: ThemeData(
+          scaffoldBackgroundColor: WorldClockColors.lightBG,
           primarySwatch: Colors.blue,
         ),
         home: const HomePage(),

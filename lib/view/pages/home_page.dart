@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dop_case/constants/asset_paths.dart';
+import 'package:dop_case/constants/colors.dart';
 import 'package:dop_case/constants/routes.dart';
 import 'package:dop_case/main.dart';
 import 'package:dop_case/provider/app_state.dart';
@@ -23,6 +24,9 @@ class _HomePageState extends State<HomePage> {
   bool isLoading = false;
   changeLoading() => setState(() => isLoading = !isLoading);
 
+  TextEditingController searchController = TextEditingController();
+  List<String> timezoneSearchResults = [];
+
   @override
   void initState() {
     getTimezones();
@@ -34,7 +38,25 @@ class _HomePageState extends State<HomePage> {
     var app = Provider.of<AppState>(context, listen: false);
     await app.getSingleTimezone();
     await app.getTimezoneList();
+    timezoneSearchResults = app.timezones;
     changeLoading();
+  }
+
+  onSearchInputChange(String key, AppState app) {
+    if (key.trim().isEmpty) {
+      timezoneSearchResults = app.timezones;
+    } else {
+      timezoneSearchResults = app.timezones
+          .where((element) => element.toLowerCase().contains(key.toLowerCase()))
+          .toList();
+    }
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,7 +71,27 @@ class _HomePageState extends State<HomePage> {
               : Column(
                   children: [
                     Text(app.localTimezone?.timezone ?? "null"),
-                    TimezoneList(timezoneList: app.timezones)
+                    TextField(
+                      controller: searchController,
+                      onChanged: (key) => onSearchInputChange(key, app),
+                      decoration: InputDecoration(
+                        hintText: "Arama",
+                        fillColor: Colors.white,
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 14.5),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(99),
+                          borderSide: const BorderSide(
+                              color: WorldClockColors.strokeBlue),
+                        ),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 12),
+                          child: SvgPicture.asset(AssetPaths.search),
+                        ),
+                      ),
+                    ),
+                    TimezoneList(timezoneList: timezoneSearchResults)
                   ],
                 ),
         ),
