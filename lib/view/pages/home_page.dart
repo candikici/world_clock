@@ -1,7 +1,16 @@
+import 'dart:developer';
+
+import 'package:dop_case/constants/asset_paths.dart';
+import 'package:dop_case/constants/routes.dart';
+import 'package:dop_case/main.dart';
 import 'package:dop_case/provider/app_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:provider/provider.dart';
+
+import '../widgets/timezone_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,14 +49,7 @@ class _HomePageState extends State<HomePage> {
               : Column(
                   children: [
                     Text(app.localTimezone?.timezone ?? "null"),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: app.timezones.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return Text(app.timezones[index]);
-                        },
-                      ),
-                    )
+                    TimezoneList(timezoneList: app.timezones)
                   ],
                 ),
         ),
