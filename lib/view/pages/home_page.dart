@@ -75,8 +75,9 @@ class _HomePageState extends State<HomePage> {
                         width: double.infinity,
                         padding: const EdgeInsets.only(
                             left: 33, right: 33, top: 69, bottom: 45),
-                        decoration: const BoxDecoration(
-                            color: WorldClockColors.lightBlue,
+                        decoration: BoxDecoration(
+                            color:
+                                Theme.of(context).appBarTheme.backgroundColor,
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(32),
                               bottomRight: Radius.circular(32),

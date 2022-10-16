@@ -22,7 +22,7 @@ class TimezoneTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
         decoration: BoxDecoration(
-            color: WorldClockColors.lightBlue,
+            color: Theme.of(context).appBarTheme.backgroundColor,
             borderRadius: BorderRadius.circular(8)),
         child: Stack(
           alignment: Alignment.center,
@@ -40,8 +40,10 @@ class TimezoneTile extends StatelessWidget {
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: WorldClockColors.lightBlue,
-                    border: Border.all(width: 3, color: Colors.white)),
+                    color: Theme.of(context).appBarTheme.backgroundColor,
+                    border: Border.all(
+                        width: 3,
+                        color: Theme.of(context).scaffoldBackgroundColor)),
                 child: SvgPicture.asset(AssetPaths.arrowRight),
               ),
             ),
