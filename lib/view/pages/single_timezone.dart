@@ -47,11 +47,23 @@ class _SingleTimezoneState extends State<SingleTimezone> {
           children: [
             TimeWidget(time: DateTime.now()),
             const SizedBox(height: 28),
-            Text("Abidjan"),
-            Text("Africa"),
+            Text(
+              "Abidjan",
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Text(
+              "Africa",
+              style: Theme.of(context).textTheme.headline5,
+            ),
             const SizedBox(height: 10),
-            Text("Çarşamba,  GMT +01:00"),
-            Text("Haziran 8, 2022"),
+            Text(
+              "Çarşamba,  GMT +01:00",
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              "Haziran 8, 2022",
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ],
         ),
       ),
@@ -131,7 +143,7 @@ class TimeItemWidget extends StatelessWidget {
         child: Center(
             child: Text(
           item,
-          style: const TextStyle(color: WorldClockColors.dark, fontSize: 79),
+          style: Theme.of(context).textTheme.headline3,
         )),
       ),
     );

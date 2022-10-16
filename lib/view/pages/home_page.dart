@@ -88,17 +88,32 @@ class _HomePageState extends State<HomePage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Günaydın, Özgür!"),
+                                Text(
+                                  "Günaydın, Özgür!",
+                                  style: Theme.of(context).textTheme.headline2,
+                                ),
                                 const SizedBox(height: 5),
                                 if (app.localTimezone != null)
-                                  Text(DateFormat("kk:MM")
-                                      .format(app.localTimezone!.datetime))
+                                  Text(
+                                    DateFormat("kk:MM")
+                                        .format(app.localTimezone!.datetime),
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  )
                                 else
-                                  Text("data"),
+                                  Text(
+                                    "data",
+                                    style:
+                                        Theme.of(context).textTheme.headline1,
+                                  ),
                                 const SizedBox(height: 5),
                                 if (app.localTimezone != null)
-                                  Text(DateFormat("d MMMM, EEEE", "tr")
-                                      .format(app.localTimezone!.datetime))
+                                  Text(
+                                    DateFormat("d MMMM, EEEE", "tr")
+                                        .format(app.localTimezone!.datetime),
+                                    style:
+                                        Theme.of(context).textTheme.headline2,
+                                  )
                                 else
                                   Text("data"),
                               ],
@@ -125,20 +140,6 @@ class _HomePageState extends State<HomePage> {
                             onChanged: (key) => onSearchInputChange(key, app),
                             decoration: InputDecoration(
                               hintText: "Arama",
-                              fillColor: Colors.white,
-                              filled: true,
-                              contentPadding:
-                                  const EdgeInsets.symmetric(vertical: 14.5),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(99),
-                                borderSide: const BorderSide(
-                                    color: WorldClockColors.strokeBlue),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(99),
-                                borderSide: const BorderSide(
-                                    color: WorldClockColors.strokeBlue),
-                              ),
                               prefixIcon: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 15, vertical: 12),

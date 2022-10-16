@@ -28,7 +28,12 @@ class TimezoneTile extends StatelessWidget {
           alignment: Alignment.center,
           clipBehavior: Clip.none,
           children: [
-            Align(alignment: Alignment.centerLeft, child: Text(timezone)),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  timezone,
+                  style: Theme.of(context).textTheme.caption,
+                )),
             Positioned(
               right: -32,
               child: Container(
