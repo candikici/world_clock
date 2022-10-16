@@ -123,10 +123,20 @@ class _HomePageState extends State<HomePage> {
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: WorldClockColors.dark,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                   border: Border.all(
-                                      width: 3, color: Colors.white)),
-                              child: SvgPicture.asset(AssetPaths.moon),
+                                      strokeAlign: StrokeAlign.outside,
+                                      width: 3,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary
+                                          .withOpacity(0.2))),
+                              child: SvgPicture.asset(
+                                  Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? AssetPaths.sun
+                                      : AssetPaths.moon),
                             ),
                           ],
                         ),
@@ -152,6 +162,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 42),
                   TimezoneList(timezoneList: timezoneSearchResults)
                 ],
               ),

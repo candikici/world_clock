@@ -1,5 +1,7 @@
+import 'package:dop_case/constants/asset_paths.dart';
 import 'package:dop_case/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/app_state.dart';
@@ -32,7 +34,7 @@ class _SingleTimezoneState extends State<SingleTimezone> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("WORLD TIME"),
+        title: SvgPicture.asset(AssetPaths.worldTime),
         toolbarHeight: 111,
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -116,8 +118,9 @@ class DotWidget extends StatelessWidget {
     return Container(
       height: 9,
       width: 9,
-      decoration: const BoxDecoration(
-          shape: BoxShape.circle, color: WorldClockColors.dark),
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Theme.of(context).textTheme.headline3!.color),
     );
   }
 }
@@ -136,7 +139,7 @@ class TimeItemWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 22),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.secondaryContainer,
           border: Border.all(width: 2, color: WorldClockColors.dark),
           borderRadius: BorderRadius.circular(14),
         ),

@@ -44,7 +44,10 @@ class TimezoneTile extends StatelessWidget {
                     border: Border.all(
                         width: 3,
                         color: Theme.of(context).scaffoldBackgroundColor)),
-                child: SvgPicture.asset(AssetPaths.arrowRight),
+                child: SvgPicture.asset(
+                  AssetPaths.arrowRight,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
             ),
           ],

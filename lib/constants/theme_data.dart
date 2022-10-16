@@ -65,12 +65,16 @@ class WorldClockThemeData {
         color: WorldClockColors.dark,
       ),
     ),
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+        secondaryContainer: Colors.white,
+        secondary: WorldClockColors.dark,
+        brightness: Brightness.light),
   );
 
   static final ThemeData darkTheme = ThemeData(
     brightness: Brightness.dark,
     appBarTheme: const AppBarTheme(
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         iconTheme: IconThemeData(color: Colors.white),
         titleTextStyle: TextStyle(color: Colors.white),
         color: WorldClockColors.dark2),
@@ -129,6 +133,11 @@ class WorldClockThemeData {
         fontWeight: FontWeight.w500,
         color: Colors.white,
       ),
+    ),
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+      secondaryContainer: WorldClockColors.dark2,
+      secondary: Colors.white,
+      brightness: Brightness.dark,
     ),
   );
 }
