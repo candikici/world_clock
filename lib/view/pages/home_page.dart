@@ -1,6 +1,7 @@
 import 'package:dop_case/constants/asset_paths.dart';
 import 'package:dop_case/constants/colors.dart';
 import 'package:dop_case/provider/app_state.dart';
+import 'package:dop_case/provider/theme_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/svg.dart';
@@ -119,24 +120,38 @@ class _HomePageState extends State<HomePage> {
                                   Text("data"),
                               ],
                             ),
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                  border: Border.all(
-                                      strokeAlign: StrokeAlign.outside,
-                                      width: 3,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary
-                                          .withOpacity(0.2))),
-                              child: SvgPicture.asset(
-                                  Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? AssetPaths.sun
-                                      : AssetPaths.moon),
+                            GestureDetector(
+                              onTap: () {
+                                var currentBrightness =
+                                    Theme.of(context).brightness;
+                                var themeModeToSet =
+                                    currentBrightness == Brightness.dark
+                                        ? ThemeMode.light
+                                        : ThemeMode.dark;
+                                var themeNotifier = Provider.of<ThemeNotifier>(
+                                    context,
+                                    listen: false);
+                                themeNotifier.setTheme(themeModeToSet);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
+                                    border: Border.all(
+                                        strokeAlign: StrokeAlign.outside,
+                                        width: 3,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                            .withOpacity(0.2))),
+                                child: SvgPicture.asset(
+                                    Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? AssetPaths.sun
+                                        : AssetPaths.moon),
+                              ),
                             ),
                           ],
                         ),
