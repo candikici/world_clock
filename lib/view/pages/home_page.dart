@@ -1,12 +1,8 @@
-import 'dart:developer';
-
 import 'package:dop_case/constants/asset_paths.dart';
 import 'package:dop_case/constants/colors.dart';
-import 'package:dop_case/constants/routes.dart';
-import 'package:dop_case/main.dart';
 import 'package:dop_case/provider/app_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 
@@ -41,6 +37,7 @@ class _HomePageState extends State<HomePage> {
     await app.getTimezoneList();
     timezoneSearchResults = app.timezones;
     changeLoading();
+    FlutterNativeSplash.remove();
   }
 
   onSearchInputChange(String key, AppState app) {
