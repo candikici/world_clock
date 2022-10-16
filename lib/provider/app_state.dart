@@ -17,33 +17,41 @@ class AppState with ChangeNotifier {
   Timezone? selectedTimezone;
 
   getTimezoneList() async {
-    var response = await httpService.get(url: WorldClockURLs.timezonesURL);
-    if (response.statusCode >= 200 && response.statusCode <= 299) {
-      var decodedJson = jsonDecode(response.body);
-      timezones = List.from(decodedJson.map((x) => x as String));
+    try {
+      var response = await httpService.get(url: WorldClockURLs.timezonesURL);
+      if (response.statusCode >= 200 && response.statusCode <= 299) {
+        var decodedJson = jsonDecode(response.body);
+        timezones = List.from(decodedJson.map((x) => x as String));
+      }
+      notifyListeners();
+    } catch (e) {
+      log(e.toString(), name: "TIMEZONE LIST ERROR");
     }
-    notifyListeners();
   }
 
   getSingleTimezone({String? zone}) async {
-    String timezone = "";
-    if (zone != null) {
-      timezone = zone;
-    } else {
-      timezone = await FlutterNativeTimezone.getLocalTimezone();
-    }
-    var response = await httpService.get(
-        url: WorldClockURLs.singleTimezoneURL
-            .replaceAll("{timezone}", timezone));
-    if (response.statusCode >= 200 && response.statusCode <= 299) {
-      log(response.body.toString());
-      var decodedJson = jsonDecode(response.body);
-      if (zone == null) {
-        localTimezone = Timezone.fromMap(decodedJson);
+    try {
+      String timezone = "";
+      if (zone != null) {
+        timezone = zone;
       } else {
-        selectedTimezone = Timezone.fromMap(decodedJson);
+        timezone = await FlutterNativeTimezone.getLocalTimezone();
       }
+      var response = await httpService.get(
+          url: WorldClockURLs.singleTimezoneURL
+              .replaceAll("{timezone}", timezone));
+      if (response.statusCode >= 200 && response.statusCode <= 299) {
+        log(response.body.toString());
+        var decodedJson = jsonDecode(response.body);
+        if (zone == null) {
+          localTimezone = Timezone.fromMap(decodedJson);
+        } else {
+          selectedTimezone = Timezone.fromMap(decodedJson);
+        }
+      }
+      notifyListeners();
+    } catch (e) {
+      log(e.toString(), name: "SINGLE TIMEZONE ERROR");
     }
-    notifyListeners();
   }
 }

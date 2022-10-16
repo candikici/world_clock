@@ -15,7 +15,7 @@ class TimezoneList extends StatelessWidget {
       child: ListView.separated(
         separatorBuilder: (_, __) => const SizedBox(height: 10),
         itemCount: timezoneList.length,
-        padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 42),
         itemBuilder: (BuildContext context, int index) {
           var timezone = timezoneList[index];
           return TimezoneTile(timezone: timezone);

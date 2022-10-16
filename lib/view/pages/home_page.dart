@@ -8,6 +8,7 @@ import 'package:dop_case/provider/app_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 import 'package:provider/provider.dart';
 
@@ -62,39 +63,99 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppState>(builder: (context, app, child) {
-      return SafeArea(
-        child: Scaffold(
-          body: isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Column(
-                  children: [
-                    Text(app.localTimezone?.timezone ?? "null"),
-                    TextField(
-                      controller: searchController,
-                      onChanged: (key) => onSearchInputChange(key, app),
-                      decoration: InputDecoration(
-                        hintText: "Arama",
-                        fillColor: Colors.white,
-                        contentPadding:
-                            const EdgeInsets.symmetric(vertical: 14.5),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(99),
-                          borderSide: const BorderSide(
-                              color: WorldClockColors.strokeBlue),
-                        ),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15, vertical: 12),
-                          child: SvgPicture.asset(AssetPaths.search),
+      return Scaffold(
+        body: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.only(
+                            left: 33, right: 33, top: 69, bottom: 45),
+                        decoration: const BoxDecoration(
+                            color: WorldClockColors.lightBlue,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(32),
+                              bottomRight: Radius.circular(32),
+                            )),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Günaydın, Özgür!"),
+                                const SizedBox(height: 5),
+                                if (app.localTimezone != null)
+                                  Text(DateFormat("kk:MM")
+                                      .format(app.localTimezone!.datetime))
+                                else
+                                  Text("data"),
+                                const SizedBox(height: 5),
+                                if (app.localTimezone != null)
+                                  Text(DateFormat("d MMMM, EEEE", "tr")
+                                      .format(app.localTimezone!.datetime))
+                                else
+                                  Text("data"),
+                              ],
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: WorldClockColors.dark,
+                                  border: Border.all(
+                                      width: 3, color: Colors.white)),
+                              child: SvgPicture.asset(AssetPaths.moon),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    TimezoneList(timezoneList: timezoneSearchResults)
-                  ],
-                ),
-        ),
+                      Positioned(
+                        bottom: -22,
+                        child: SizedBox(
+                          height: 44,
+                          width: MediaQuery.of(context).size.width - 66,
+                          child: TextField(
+                            controller: searchController,
+                            onChanged: (key) => onSearchInputChange(key, app),
+                            decoration: InputDecoration(
+                              hintText: "Arama",
+                              fillColor: Colors.white,
+                              filled: true,
+                              contentPadding:
+                                  const EdgeInsets.symmetric(vertical: 14.5),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(99),
+                                borderSide: const BorderSide(
+                                    color: WorldClockColors.strokeBlue),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(99),
+                                borderSide: const BorderSide(
+                                    color: WorldClockColors.strokeBlue),
+                              ),
+                              prefixIcon: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 12),
+                                child: SvgPicture.asset(AssetPaths.search),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  TimezoneList(timezoneList: timezoneSearchResults)
+                ],
+              ),
       );
     });
   }
