@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                             color:
                                 Theme.of(context).appBarTheme.backgroundColor,
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(32),
                               bottomRight: Radius.circular(32),
                             )),

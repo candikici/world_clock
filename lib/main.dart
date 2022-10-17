@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:dop_case/constants/colors.dart';
 import 'package:dop_case/constants/theme_data.dart';
 import 'package:dop_case/provider/theme_notifier.dart';
 import 'package:dop_case/services/http/http_service.dart';
@@ -9,7 +6,6 @@ import 'package:dop_case/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,11 +20,11 @@ Future<void> main() async {
   final HttpService httpService = HttpService();
   var prefs = await SharedPreferences.getInstance();
   bool? isDarkTheme = prefs.getBool("isDarkTheme");
-  log(isDarkTheme.toString(), name: "PREFS");
+
   ThemeMode themeMode = isDarkTheme != null
       ? (isDarkTheme ? ThemeMode.dark : ThemeMode.light)
       : ThemeMode.system;
-  log(themeMode.toString(), name: "Theme Mode");
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<AppState>(

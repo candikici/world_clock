@@ -5,7 +5,6 @@ import 'package:dop_case/constants/api_endpoints.dart';
 import 'package:dop_case/models/timezone.dart';
 import 'package:dop_case/services/http/http_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 
 class AppState with ChangeNotifier {
   final HttpService httpService;
