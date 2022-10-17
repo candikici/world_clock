@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isLoading = false;
   changeLoading() => setState(() => isLoading = !isLoading);
-
+  DateTime localTime = DateTime.now();
   TextEditingController searchController = TextEditingController();
   List<String> timezoneSearchResults = [];
 
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   getTimezones() async {
     changeLoading();
     var app = Provider.of<AppState>(context, listen: false);
-    await app.getSingleTimezone();
+
     await app.getTimezoneList();
     timezoneSearchResults = app.timezones;
     changeLoading();
@@ -95,29 +95,16 @@ class _HomePageState extends State<HomePage> {
                                   style: Theme.of(context).textTheme.headline2,
                                 ),
                                 const SizedBox(height: 5),
-                                if (app.localTimezone != null)
-                                  Text(
-                                    DateFormat("kk:MM")
-                                        .format(app.localTimezone!.datetime),
-                                    style:
-                                        Theme.of(context).textTheme.headline1,
-                                  )
-                                else
-                                  Text(
-                                    "data",
-                                    style:
-                                        Theme.of(context).textTheme.headline1,
-                                  ),
+                                Text(
+                                  DateFormat("kk : mm").format(localTime),
+                                  style: Theme.of(context).textTheme.headline1,
+                                ),
                                 const SizedBox(height: 5),
-                                if (app.localTimezone != null)
-                                  Text(
-                                    DateFormat("d MMMM, EEEE", "tr")
-                                        .format(app.localTimezone!.datetime),
-                                    style:
-                                        Theme.of(context).textTheme.headline2,
-                                  )
-                                else
-                                  Text("data"),
+                                Text(
+                                  DateFormat("d MMMM, EEEE", "tr")
+                                      .format(localTime),
+                                  style: Theme.of(context).textTheme.headline2,
+                                )
                               ],
                             ),
                             GestureDetector(
@@ -162,6 +149,10 @@ class _HomePageState extends State<HomePage> {
                           height: 44,
                           width: MediaQuery.of(context).size.width - 66,
                           child: TextField(
+                            cursorColor: WorldClockColors.strokeBlue,
+                            style: Theme.of(context)
+                                .inputDecorationTheme
+                                .hintStyle,
                             controller: searchController,
                             onChanged: (key) => onSearchInputChange(key, app),
                             decoration: InputDecoration(

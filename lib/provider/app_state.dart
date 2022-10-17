@@ -13,7 +13,7 @@ class AppState with ChangeNotifier {
   AppState({required this.httpService});
 
   List<String> timezones = [];
-  Timezone? localTimezone;
+
   Timezone? selectedTimezone;
 
   getTimezoneList() async {
@@ -29,25 +29,14 @@ class AppState with ChangeNotifier {
     }
   }
 
-  getSingleTimezone({String? zone}) async {
+  getSingleTimezone({required String zone}) async {
     try {
-      String timezone = "";
-      if (zone != null) {
-        timezone = zone;
-      } else {
-        timezone = await FlutterNativeTimezone.getLocalTimezone();
-      }
       var response = await httpService.get(
-          url: WorldClockURLs.singleTimezoneURL
-              .replaceAll("{timezone}", timezone));
+          url: WorldClockURLs.singleTimezoneURL.replaceAll("{timezone}", zone));
       if (response.statusCode >= 200 && response.statusCode <= 299) {
         log(response.body.toString());
         var decodedJson = jsonDecode(response.body);
-        if (zone == null) {
-          localTimezone = Timezone.fromMap(decodedJson);
-        } else {
-          selectedTimezone = Timezone.fromMap(decodedJson);
-        }
+        selectedTimezone = Timezone.fromMap(decodedJson);
       }
       notifyListeners();
     } catch (e) {

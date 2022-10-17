@@ -23,9 +23,14 @@ class Timezone {
   }
 
   factory Timezone.fromMap(Map<String, dynamic> map) {
+    var utcOffset = map['utc_offset'].replaceAll("+", "");
+    var offsetList = utcOffset.split(":");
+    int offsetInHours = int.tryParse(offsetList?.first) ?? 0;
+    int offsetInMinutes = int.tryParse(offsetList?.last) ?? 0;
     return Timezone(
       abbreviation: map['abbreviation'] ?? '',
-      datetime: DateTime.parse(map['datetime']),
+      datetime: DateTime.parse(map['datetime'])
+          .add(Duration(hours: offsetInHours, minutes: offsetInMinutes)),
       timezone: map['timezone'] ?? '',
       utcDatetime: DateTime.parse(map['utc_datetime']),
       utcOffset: map['utc_offset'] ?? '',

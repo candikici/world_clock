@@ -13,6 +13,8 @@ class WorldClockThemeData {
         color: WorldClockColors.lightBlue),
     scaffoldBackgroundColor: WorldClockColors.lightBG,
     fontFamily: GoogleFonts.montserrat().fontFamily,
+    progressIndicatorTheme:
+        const ProgressIndicatorThemeData(color: WorldClockColors.lightBlue),
     inputDecorationTheme: InputDecorationTheme(
         fillColor: Colors.white,
         filled: true,
@@ -78,6 +80,8 @@ class WorldClockThemeData {
         iconTheme: IconThemeData(color: Colors.white),
         titleTextStyle: TextStyle(color: Colors.white),
         color: WorldClockColors.dark2),
+    progressIndicatorTheme:
+        const ProgressIndicatorThemeData(color: WorldClockColors.dark2),
     scaffoldBackgroundColor: WorldClockColors.dark,
     fontFamily: GoogleFonts.montserrat().fontFamily,
     inputDecorationTheme: InputDecorationTheme(
