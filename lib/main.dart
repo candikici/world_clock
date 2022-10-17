@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dop_case/constants/colors.dart';
 import 'package:dop_case/constants/theme_data.dart';
 import 'package:dop_case/provider/theme_notifier.dart';
@@ -10,22 +12,30 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'provider/app_state.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   final HttpService httpService = HttpService();
+  var prefs = await SharedPreferences.getInstance();
+  bool? isDarkTheme = prefs.getBool("isDarkTheme");
+  log(isDarkTheme.toString(), name: "PREFS");
+  ThemeMode themeMode = isDarkTheme != null
+      ? (isDarkTheme ? ThemeMode.dark : ThemeMode.light)
+      : ThemeMode.system;
+  log(themeMode.toString(), name: "Theme Mode");
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<AppState>(
         create: (context) => AppState(httpService: httpService),
       ),
       ChangeNotifierProvider<ThemeNotifier>(
-        create: (context) => ThemeNotifier(ThemeMode.system),
+        create: (context) => ThemeNotifier(themeMode),
       ),
     ],
     child: WorldClock(appRouter: AppRouter()),
