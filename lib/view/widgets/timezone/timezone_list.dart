@@ -1,4 +1,4 @@
-import 'package:dop_case/view/widgets/timezone_tile.dart';
+import 'package:dop_case/view/widgets/timezone/timezone_tile.dart';
 import 'package:flutter/material.dart';
 
 class TimezoneList extends StatelessWidget {

@@ -1,11 +1,12 @@
 import 'package:dop_case/constants/asset_paths.dart';
-import 'package:dop_case/constants/colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/app_state.dart';
+import '../widgets/time/time_widget.dart';
 
 class SingleTimezone extends StatefulWidget {
   const SingleTimezone({super.key, required this.timezone});
@@ -47,7 +48,7 @@ class _SingleTimezoneState extends State<SingleTimezone> {
             width: 149,
             color: Theme.of(context).appBarTheme.iconTheme!.color,
           ),
-          toolbarHeight: 111,
+          toolbarHeight: 111 - MediaQuery.of(context).viewPadding.top,
           centerTitle: true,
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -100,91 +101,5 @@ class _SingleTimezoneState extends State<SingleTimezone> {
                   ),
       );
     });
-  }
-}
-
-class TimeWidget extends StatelessWidget {
-  const TimeWidget({
-    Key? key,
-    required this.time,
-  }) : super(key: key);
-
-  final DateTime time;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        TimeItemWidget(
-            item: time.hour < 10
-                ? "0${time.hour.toString()}"
-                : time.hour.toString()),
-        const SizedBox(width: 10),
-        const ColonWidget(),
-        const SizedBox(width: 10),
-        TimeItemWidget(
-            item: time.minute < 10
-                ? "0${time.minute.toString()}"
-                : time.minute.toString()),
-      ],
-    );
-  }
-}
-
-class ColonWidget extends StatelessWidget {
-  const ColonWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: const [DotWidget(), SizedBox(height: 16), DotWidget()],
-    );
-  }
-}
-
-class DotWidget extends StatelessWidget {
-  const DotWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 9,
-      width: 9,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Theme.of(context).textTheme.headline3!.color),
-    );
-  }
-}
-
-class TimeItemWidget extends StatelessWidget {
-  const TimeItemWidget({
-    Key? key,
-    required this.item,
-  }) : super(key: key);
-
-  final String item;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 22),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondaryContainer,
-          border: Border.all(width: 2, color: WorldClockColors.dark),
-          borderRadius: BorderRadius.circular(14),
-        ),
-        child: Center(
-            child: Text(
-          item,
-          style: Theme.of(context).textTheme.headline3,
-        )),
-      ),
-    );
   }
 }

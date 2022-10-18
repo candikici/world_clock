@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../constants/asset_paths.dart';
-import '../../constants/routes.dart';
+import '../../../constants/asset_paths.dart';
+import '../../../constants/routes.dart';
 
 class TimezoneTile extends StatelessWidget {
   const TimezoneTile({
