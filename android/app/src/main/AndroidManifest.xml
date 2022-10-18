@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dop_case">
+    package="com.candikici.worldClock">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="dop_case"
+        android:label="World Clock"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

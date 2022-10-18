@@ -1,4 +1,4 @@
-package com.example.dop_case
+package com.candikici.worldClock
 
 import io.flutter.embedding.android.FlutterActivity
 

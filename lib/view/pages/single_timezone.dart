@@ -79,7 +79,7 @@ class _SingleTimezoneState extends State<SingleTimezone> {
                         TimeWidget(time: app.selectedTimezone!.datetime),
                         const SizedBox(height: 28),
                         Text(
-                          timezone.last,
+                          timezone.last.replaceAll("_", " "),
                           style: Theme.of(context).textTheme.headline4,
                         ),
                         Text(

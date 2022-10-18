@@ -1,11 +1,11 @@
 import 'package:dop_case/provider/app_state.dart';
 import 'package:dop_case/provider/theme_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
-import '../widgets/local_timezone_widget.dart';
+import '../widgets/homepage_appbar.dart';
 import '../widgets/search_input.dart';
-import '../widgets/theme_selection_widget.dart';
 import '../widgets/timezone/timezone_list.dart';
 
 class HomePage extends StatefulWidget {
@@ -58,52 +58,40 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppState>(builder: (context, app, child) {
-      return Scaffold(
-        body: isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : Column(
-                children: [
-                  Stack(
-                    alignment: Alignment.bottomCenter,
-                    clipBehavior: Clip.none,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.only(
-                            left: 33, right: 33, top: 69, bottom: 45),
-                        decoration: BoxDecoration(
-                            color:
-                                Theme.of(context).appBarTheme.backgroundColor,
-                            borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(32),
-                              bottomRight: Radius.circular(32),
-                            )),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            LocalTimezoneWidget(localTime: localTime),
-                            ThemeSelectionWidget(
-                                themeSelection: () => _themeSelection(context)),
-                          ],
+      return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: Theme.of(context).brightness == Brightness.dark
+            ? SystemUiOverlayStyle.light
+            : SystemUiOverlayStyle.dark,
+        child: Scaffold(
+          body: isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Column(
+                  children: [
+                    Stack(
+                      alignment: Alignment.bottomCenter,
+                      clipBehavior: Clip.none,
+                      children: [
+                        HomepageAppbar(
+                          localTime: localTime,
+                          themeSelection: () => _themeSelection(context),
                         ),
-                      ),
-                      Positioned(
-                        bottom: -22,
-                        child: SearchInput(
-                          searchController: searchController,
-                          onSearchChanged: (key) =>
-                              onSearchInputChange(key, app),
+                        Positioned(
+                          bottom: -22,
+                          child: SearchInput(
+                            searchController: searchController,
+                            onSearchChanged: (key) =>
+                                onSearchInputChange(key, app),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 42),
-                  TimezoneList(timezoneList: timezoneSearchResults)
-                ],
-              ),
+                      ],
+                    ),
+                    const SizedBox(height: 42),
+                    TimezoneList(timezoneList: timezoneSearchResults)
+                  ],
+                ),
+        ),
       );
     });
   }

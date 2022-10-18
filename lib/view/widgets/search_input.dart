@@ -20,7 +20,9 @@ class SearchInput extends StatelessWidget {
       height: 44,
       width: MediaQuery.of(context).size.width - 66,
       child: TextField(
-        cursorColor: WorldClockColors.strokeBlue,
+        cursorColor: Theme.of(context).brightness == Brightness.dark
+            ? WorldClockColors.dark2
+            : WorldClockColors.strokeBlue,
         style: Theme.of(context).inputDecorationTheme.hintStyle,
         controller: searchController,
         onChanged: onSearchChanged,

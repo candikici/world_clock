@@ -41,9 +41,16 @@ dependencies:
   shared_preferences: ^2.0.15
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.10.0
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "dev_assets/logo.png"
 
 flutter_native_splash:
   image: "dev_assets/splash.png"

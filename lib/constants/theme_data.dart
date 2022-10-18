@@ -90,11 +90,11 @@ class WorldClockThemeData {
         contentPadding: const EdgeInsets.symmetric(vertical: 14.5),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(99),
-          borderSide: const BorderSide(color: WorldClockColors.strokeBlue),
+          borderSide: const BorderSide(color: WorldClockColors.dark2),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(99),
-          borderSide: const BorderSide(color: WorldClockColors.strokeBlue),
+          borderSide: const BorderSide(color: WorldClockColors.dark2),
         ),
         hintStyle: const TextStyle(
           fontSize: 12,
